@@ -12,6 +12,7 @@ BuildRequires:  gcc
 BuildRequires:  make
 BuildRequires:  libtool
 BuildRequires:  gnutls-devel
+BuildRequires:  libev-devel
 
 %description
 "Call it TCP/2. One More Time."
@@ -35,7 +36,7 @@ Development headers and libraries.
 
 %build
 autoreconf -fsi
-%configure --with-gnutls --disable-static --enable-werror
+%configure --with-gnutls --with-libev --disable-static --enable-werror
 %make_build
 
 
