@@ -43,6 +43,7 @@ autoreconf -fsi
 %install
 %make_install
 
+# TODO: import also munit and run unit tests in %check section.
 
 %files
 %license COPYING
