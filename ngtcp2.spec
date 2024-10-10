@@ -11,7 +11,7 @@ BuildRequires:  autoconf
 BuildRequires:  gcc
 BuildRequires:  make
 BuildRequires:  libtool
-BuildRequires:  gnutls-devel
+BuildRequires:  gnutls-devel >= 3.7.5
 BuildRequires:  libev-devel
 
 %description
