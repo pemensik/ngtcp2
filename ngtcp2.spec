@@ -1,11 +1,13 @@
 Name:           ngtcp2
-Version:        1.8.0
+Version:        1.8.1
 Release:        %autorelease
 Summary:        ngtcp2 project is an effort to implement RFC9000 QUIC protocol
 
 License:        MIT
 URL:            https://github.com/ngtcp2/ngtcp2
-Source0:        %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
+Source0:        %{url}/releases/download/v%{version}/%{name}-%{version}.tar.xz
+Source1:        %{url}/releases/download/v%{version}/%{name}-%{version}.tar.xz.asc
+Source2:        https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xf4f3b91474d1eb29889bd0ef7e8403d5d673c366#/tatsuhiro-t.asc
 
 BuildRequires:  autoconf
 BuildRequires:  gcc
@@ -13,6 +15,9 @@ BuildRequires:  make
 BuildRequires:  libtool
 BuildRequires:  gnutls-devel >= 3.7.5
 BuildRequires:  libev-devel
+BuildRequires:  python3-sphinx
+BuildRequires:  python3-sphinx_rtd_theme
+BuildRequires:  gnupg2
 
 %description
 "Call it TCP/2. One More Time."
@@ -30,14 +35,27 @@ ngtcp2 project is an effort to implement RFC9000 QUIC protocol.
 
 Development headers and libraries.
 
+%package doc
+Summary:        ngtcp2 documentation
+Requires:       %{name}%{?_isa} = %{version}-%{release}
+
+%description doc
+"Call it TCP/2. One More Time."
+
+ngtcp2 project is an effort to implement RFC9000 QUIC protocol.
+
+Development API documentation.
+
 %prep
 %autosetup
+%{gpgverify} --keyring='%{SOURCE2}' --signature='%{SOURCE1}' --data='%{SOURCE0}'
 
 
 %build
 autoreconf -fsi
 %configure --with-gnutls --with-libev --disable-static --enable-werror
 %make_build
+%make_build html
 
 
 %install
@@ -60,6 +78,10 @@ autoreconf -fsi
 %{_libdir}/pkgconfig/libngtcp2.pc
 %{_libdir}/pkgconfig/libngtcp2_crypto_gnutls.pc
 %{_includedir}/%{name}/
+
+
+%files doc
+%doc doc/build/html/
 
 
 %changelog
