@@ -74,7 +74,7 @@ autoreconf -fsi
 %files
 %license COPYING
 %doc README.rst
-%doc SECURITY.md
+#doc SECURITY.md
 %doc AUTHORS
 %{_libdir}/libngtcp2.so.16*
 %{_libdir}/libngtcp2_crypto_gnutls.so.8*
