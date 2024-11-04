@@ -8,6 +8,11 @@ URL:            https://github.com/ngtcp2/ngtcp2
 Source0:        %{url}/releases/download/v%{version}/%{name}-%{version}.tar.xz
 Source1:        %{url}/releases/download/v%{version}/%{name}-%{version}.tar.xz.asc
 Source2:        https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xf4f3b91474d1eb29889bd0ef7e8403d5d673c366#/tatsuhiro-t.asc
+# Release does not contain all parts to build documentation
+# https://github.com/ngtcp2/ngtcp2/pull/1404
+Source3:        %{url}/raw/refs/tags/v%{version}/doc/mkapiref.py
+Source4:        %{url}/raw/refs/tags/v%{version}/doc/source/index.rst
+Source5:        %{url}/raw/refs/tags/v%{version}/doc/source/programmers-guide.rst
 
 BuildRequires:  autoconf
 BuildRequires:  gcc
@@ -49,6 +54,9 @@ Development API documentation.
 %prep
 %autosetup
 %{gpgverify} --keyring='%{SOURCE2}' --signature='%{SOURCE1}' --data='%{SOURCE0}'
+install -p -m 755 %{SOURCE3} doc/
+install -p -m 644 %{SOURCE4} doc/source/
+install -p -m 644 %{SOURCE5} doc/source/
 
 
 %build
