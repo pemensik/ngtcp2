@@ -1,5 +1,5 @@
 Name:           ngtcp2
-Version:        1.8.1
+Version:        1.13.0
 Release:        %autorelease
 Summary:        ngtcp2 project is an effort to implement RFC9000 QUIC protocol
 
