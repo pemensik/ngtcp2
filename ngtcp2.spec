@@ -1,4 +1,4 @@
-%bcond CHECK 0
+%bcond CHECK 1
 
 Name:           ngtcp2
 Version:        1.13.0
@@ -15,6 +15,9 @@ Source2:        https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xf4f3b914
 Source3:        %{url}/raw/refs/tags/v%{version}/doc/mkapiref.py
 Source4:        %{url}/raw/refs/tags/v%{version}/doc/source/index.rst
 Source5:        %{url}/raw/refs/tags/v%{version}/doc/source/programmers-guide.rst
+
+# https://github.com/ngtcp2/ngtcp2/pull/1674
+Patch1:         ngtcp2-1.13-tests.patch
 
 BuildRequires:  autoconf
 BuildRequires:  gcc
@@ -54,7 +57,7 @@ ngtcp2 project is an effort to implement RFC9000 QUIC protocol.
 Development API documentation.
 
 %prep
-%autosetup
+%autosetup -p1
 %{gpgverify} --keyring='%{SOURCE2}' --signature='%{SOURCE1}' --data='%{SOURCE0}'
 install -p -m 755 %{SOURCE3} doc/
 install -p -m 644 %{SOURCE4} doc/source/
