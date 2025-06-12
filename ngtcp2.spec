@@ -1,3 +1,5 @@
+%bcond CHECK 0
+
 Name:           ngtcp2
 Version:        1.13.0
 Release:        %autorelease
@@ -69,7 +71,11 @@ autoreconf -fsi
 %install
 %make_install
 
-# TODO: import also munit and run unit tests in %check section.
+%check
+%if %{with CHECK}
+# does not yet compile: https://github.com/ngtcp2/ngtcp2/issues/1673
+%make_build check
+%endif
 
 %files
 %license COPYING
