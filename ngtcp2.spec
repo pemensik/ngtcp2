@@ -47,7 +47,7 @@ Development headers and libraries.
 
 %package doc
 Summary:        The ngtcp2 API documentation
-Requires:       %{name}%{?_isa} = %{version}-%{release}
+Requires:       %{name} = %{version}-%{release}
 BuildArch:      noarch
 
 %description doc
