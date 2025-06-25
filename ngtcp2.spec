@@ -3,7 +3,7 @@
 Name:           ngtcp2
 Version:        1.13.0
 Release:        %autorelease
-Summary:        ngtcp2 project is an effort to implement RFC9000 QUIC protocol
+Summary:        Implementation of RFC 9000 QUIC protocol
 
 License:        MIT
 URL:            https://github.com/ngtcp2/ngtcp2
@@ -35,7 +35,7 @@ BuildRequires:  gnupg2
 ngtcp2 project is an effort to implement RFC9000 QUIC protocol.
 
 %package devel
-Summary:        ngtcp2 development files
+Summary:        The ngtcp2 development files
 Requires:       %{name}%{?_isa} = %{version}-%{release}
 
 %description devel
@@ -46,8 +46,9 @@ ngtcp2 project is an effort to implement RFC9000 QUIC protocol.
 Development headers and libraries.
 
 %package doc
-Summary:        ngtcp2 documentation
+Summary:        The ngtcp2 API documentation
 Requires:       %{name}%{?_isa} = %{version}-%{release}
+BuildArch:      noarch
 
 %description doc
 "Call it TCP/2. One More Time."
@@ -70,9 +71,12 @@ autoreconf -fsi
 %make_build
 %make_build html
 
+rm -f doc/build/html/.buildinfo
+
 
 %install
 %make_install
+
 
 %check
 %if %{with CHECK}
@@ -90,6 +94,7 @@ autoreconf -fsi
 
 
 %files devel
+%doc ChangeLog
 %{_libdir}/libngtcp2.so
 %{_libdir}/libngtcp2_crypto_gnutls.so
 %{_libdir}/pkgconfig/libngtcp2.pc
