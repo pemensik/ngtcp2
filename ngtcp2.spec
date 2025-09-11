@@ -1,7 +1,7 @@
 %bcond CHECK 1
 
 Name:           ngtcp2
-Version:        1.13.0
+Version:        1.15.1
 Release:        %autorelease
 Summary:        Implementation of RFC 9000 QUIC protocol
 
@@ -15,9 +15,6 @@ Source2:        https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xf4f3b914
 Source3:        %{url}/raw/refs/tags/v%{version}/doc/mkapiref.py
 Source4:        %{url}/raw/refs/tags/v%{version}/doc/source/index.rst
 Source5:        %{url}/raw/refs/tags/v%{version}/doc/source/programmers-guide.rst
-
-# https://github.com/ngtcp2/ngtcp2/pull/1674
-Patch1:         ngtcp2-1.13-tests.patch
 
 BuildRequires:  autoconf
 BuildRequires:  gcc
